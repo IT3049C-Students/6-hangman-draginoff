@@ -162,9 +162,22 @@ class Hangman {
    * i.e.: if the word is BOOK, and the letter O has been guessed, this would return _ O O _
    */
   getWordHolderText() {
-     placeHolder;
-    return;
+    placeHolder = " ";
+    totalWordLength = this.word.length;
+    for( i = 0; i <= totalWordLength; i++){
+      for( j = 0; j <= this.guesses.length; i++){
+        if(this.word.charAt(i) === this.guesses[j]){
+          placeholder.concat(this.word.charAt(i), " ");
+        }
+        else{
+          placeholder.concat("_ ");
+        }
+      }
+    }
+    placeHolder.trim;
+    return placeHolder;
   }
+  
 
   /**
    * This function returns a string of all the previous guesses, seperated by a comma
@@ -173,7 +186,10 @@ class Hangman {
    * Hint: use the Array.prototype.join method.
    */
   getGuessesText() {
-    return ``;
+    guess = this.guesses.join(", ");
+    guessesText = "Guesses: ";
+    guessesText.concat(guess);
+    return guessesText
   }
 
   /**
@@ -193,15 +209,41 @@ class Hangman {
     this.ctx.fillRect(10, 410, 175, 10); // Base
   }
 
-  drawHead() {}
+  drawHead() {
+    this.ctx.beginPath();
+    this.ctx.arc(250, 85, 25, 0, Math.PI*2, false);
+    this.ctx.stroke();
+  }
 
-  drawBody() {}
+  drawBody() {
+    this.ctx.fillRect(245, 110, 10, 80, false);
+  }
 
-  drawLeftArm() {}
+  drawLeftArm() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(250, 175);
+    this.ctx.lineTo(170, 100);
+    this.ctx.stroke();
+  }
 
-  drawRightArm() {}
+  drawRightArm() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(250, 175);
+    this.ctx.lineTo(300, 100);
+    this.ctx.stroke();
+  }
 
-  drawLeftLeg() {}
+  drawLeftLeg() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(245, 190);
+    this.ctx.lineTo(170, 250);
+    this.ctx.stroke();
+  }
 
-  drawRightLeg() {}
+  drawRightLeg() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(255, 190);
+    this.ctx.lineTo(330, 250);
+    this.ctx.stroke();
+  }
 }

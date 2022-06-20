@@ -30,19 +30,14 @@ game = new Hangman(canvas);
   //       3. call the game getWordHolderText and set it to the wordHolderText
   //       4. call the game getGuessessText and set it to the guessesText
   difficultySelectForm.addEventListener(`submit`, function (event) {
-    difficulty = difficultySelect.options[difficultySelect.selectedIndex].value;
-    game.start(difficulty, function next(){
-        start();
+    event.preventDefault();   
+    game.start(difficultySelect.value, function (){
+    startWrapper.classList.add(`hidden`);
+    gameWrapper.classList.remove(`hidden`);
+    wordHolderText.innerHTML = game.getWordHolderText();
+    guessesText.innerHTML = game.getGuessesText();
       });
     });
-
-    function start()
-    {
-    startWrapper.classList.add('hidden');
-    gameWrapper.classList.remove('hidden');
-    wordHolderText.innerHTML = game.getWordHolderText;
-    guessesText.innerHTML = game.getGuessesText;
-    }
 
   // add a submit Event Listener to the guessForm
   //    get the guess input
@@ -58,6 +53,7 @@ game = new Hangman(canvas);
   //      3. show the resetGame button
   // if the game is won or lost, show an alert.
   guessForm.addEventListener(`submit`, function (e) {
+    e.preventDefault();
     playerGuess = guessInput.value;
     game.guess(playerGuess);
     wordHolderText.innerHTML = game.getWordHolderText();
@@ -67,7 +63,7 @@ game = new Hangman(canvas);
     {
       guessInput.disabled = true;
       document.getElementById('guessSubmitButton').disabled = true;
-      resetGame.classList.remove('hidden');
+      resetGame.classList.remove(`hidden`);
       if(game.didWin = true)
       {
         alert("You Won");
@@ -83,8 +79,8 @@ game = new Hangman(canvas);
   //    show the startWrapper
   //    hide the gameWrapper
   resetGame.addEventListener(`click`, function (e) {
-    startWrapper.classList.remove('hidden');
-    gameWrapper.classList.add('hidden');
+    startWrapper.classList.remove(`hidden`);
+    gameWrapper.classList.add(`hidden`);
   });
 } catch (error) {
   console.error(error);
