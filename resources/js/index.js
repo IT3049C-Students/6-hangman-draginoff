@@ -30,8 +30,9 @@ game = new Hangman(canvas);
   //       3. call the game getWordHolderText and set it to the wordHolderText
   //       4. call the game getGuessessText and set it to the guessesText
   difficultySelectForm.addEventListener(`submit`, function (event) {
-    event.preventDefault();   
-    game.start(difficultySelect.value, function (){
+    event.preventDefault(); 
+    difficulty = difficultySelect.value;  
+    game.start(difficulty, function (){
     startWrapper.classList.add(`hidden`);
     gameWrapper.classList.remove(`hidden`);
     wordHolderText.innerHTML = game.getWordHolderText();
