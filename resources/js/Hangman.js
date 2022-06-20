@@ -91,6 +91,7 @@ class Hangman {
     }
     else
     {
+      wrongGuesses ++;
       this.onWrongGuess;
     }    
   }
@@ -98,6 +99,23 @@ class Hangman {
   checkWin() {
     // using the word and the guesses array, figure out how many remaining unknowns.
     // if zero, set both didWin, and isOver to true
+    totalWordLength = this.word.length;
+    missingLetters = totalWordLength;
+    for(i = 0; i< totalWordLength; i++)
+    {
+      for(i = 0; i< this.guesses.length; i++)
+      {
+        if(this.word[i] == this.guesses[i])
+        {
+          missingLetters = missingLetters - 1;
+        }
+      }
+    }
+    if(missingLetters == 0)
+    {
+      this.didWin = true;
+      this.isOver = true;
+    }
   }
 
   /**
@@ -105,7 +123,38 @@ class Hangman {
    * drawHead, drawBody, drawRightArm, drawLeftArm, drawRightLeg, or drawLeftLeg.
    * if the number wrong guesses is 6, then also set isOver to true and didWin to false.
    */
-  onWrongGuess() {}
+  onWrongGuess() {
+    if (wrongGuess == 1 ){
+      drawHead();
+    } 
+    
+    elseif (wrongGuess == 2)
+    {
+      drawBody();
+    }
+    
+    elseif (wrongGuess == 3)
+    {
+      drawRightArm();
+    } 
+
+    elseif (wrongGuess == 4)
+    {
+      drawLeftArm();
+    } 
+
+    elseif (wrongGuess == 5)
+    {
+      drawRightLeg();
+    } 
+
+    elseif(wrongGuess == 6)
+    {    
+      drawLeftLeg();
+      isOver == true;
+      didWin == false;    
+    }
+  }
 
   /**
    * This function will return a string of the word placeholder
@@ -113,6 +162,8 @@ class Hangman {
    * i.e.: if the word is BOOK, and the letter O has been guessed, this would return _ O O _
    */
   getWordHolderText() {
+     placeHolder;
+     
     return;
   }
 
