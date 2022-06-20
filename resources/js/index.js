@@ -11,7 +11,7 @@ const wordHolderText = document.getElementById(`wordHolder`);
 // GUESSING FORM
 const guessForm = document.getElementById(`guessForm`);
 const guessInput = document.getElementById(`guessInput`);
-
+const guessButton = document.getElementById(`guessSubmitButton`);
 // GAME RESET BUTTON
 const resetGame = document.getElementById(`resetGame`);
 
@@ -55,14 +55,15 @@ game = new Hangman(canvas);
   // if the game is won or lost, show an alert.
   guessForm.addEventListener(`submit`, function (e) {
     e.preventDefault();
-    playerGuess = guessInput.value;
-    game.guess(playerGuess);
+    let playerGuess = document.getElementById('guessInput');
+
+    game.guess(playerGuess.value);
     wordHolderText.innerHTML = game.getWordHolderText();
     guessesText.innerHTML = game.getGuessesText();
     let guessInput = " ";
     if (game.isOver = true)
     {
-      guessInput.disabled = true;
+      guessInput.setdisabled = true;
       document.getElementById('guessSubmitButton').disabled = true;
       resetGame.classList.remove(`hidden`);
       if(game.didWin = true)
@@ -80,8 +81,11 @@ game = new Hangman(canvas);
   //    show the startWrapper
   //    hide the gameWrapper
   resetGame.addEventListener(`click`, function (e) {
-    startWrapper.classList.remove(`hidden`);
-    gameWrapper.classList.add(`hidden`);
+    gameWrapper.classList.add('hidden');
+    resetGame.classList.add('hidden');
+    startWrapper.classList.remove('hidden');
+    guessInput.removeAttribute('disabled');
+    guessButton.removeAttribute('disabled');
   });
 } catch (error) {
   console.error(error);

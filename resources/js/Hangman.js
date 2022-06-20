@@ -59,9 +59,9 @@ class Hangman {
       throw "No Guess Provided"
     }
     // Check for invalid cases (numbers, symbols, ...) throw an error if it is
-    let splitletters = letter.split(' ');
+    let splitLetters = letter.split("");
 
-    for(const letters of splitletters){
+    for(const letters of splitLetters){
     if (!alphabet.includes(letter))
     {
       alert ("You must guess a letter!")
@@ -108,18 +108,17 @@ class Hangman {
     // using the word and the guesses array, figure out how many remaining unknowns.
     // if zero, set both didWin, and isOver to true
     totalWordLength = this.word.length;
-    missingLetters = totalWordLength;
-    for(i = 0; i< totalWordLength; i++)
+    let missingLetters = 0;
+    for(i = 0; i< this.word.length; i++)
     {
-      for(i = 0; i< this.guesses.length; i++)
-      {
-        if(this.word[i] == this.guesses[i])
-        {
-          missingLetters = missingLetters - 1;
+        letter = this.word.at(i);
+        if (!this.guesses.includes(letter)) {
+          
+          missingLetters++;
+          console.log(missingLetters);
         }
-      }
     }
-    if(missingLetters == 0)
+    if(missingLetters === 0)
     {
       this.didWin = true;
       this.isOver = true;
