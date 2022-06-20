@@ -33,10 +33,10 @@ game = new Hangman(canvas);
     event.preventDefault(); 
     difficulty = difficultySelect.value;  
     game.start(difficulty, function (){
-    startWrapper.classList.add(`hidden`);
-    gameWrapper.classList.remove(`hidden`);
-    wordHolderText.innerHTML = game.getWordHolderText();
-    guessesText.innerHTML = game.getGuessesText();
+        startWrapper.classList.add('hidden');
+        gameWrapper.classList.remove('hidden');
+        wordHolderText.innerHTML = game.getWordHolderText();
+        guessesText.innerHTML = game.getGuessesText();
       });
     });
 
