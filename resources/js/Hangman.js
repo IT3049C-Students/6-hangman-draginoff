@@ -30,9 +30,9 @@ class Hangman {
    * @param {string} difficulty a difficulty string to be passed to the getRandomWord Function
    * @param {function} next callback function to be called after a word is reveived from the API.
    */
-  start(difficulty, next) {
+  async start(difficulty, next) {
     // get word and set it to the class's this.word
-    this.word = this.getRandomWord(difficulty);
+    this.word = await this.getRandomWord(difficulty);
     // clear canvas
     this.clearCanvas();
     // draw base
@@ -43,36 +43,44 @@ class Hangman {
     this.isOver = false;
     // reset this.didWin to false
     this.didWin = false;
+    next();
   }
 
   /**
    *
    * @param {string} letter the guessed letter.
    */
+  
   guess(letter) {
+   const alphabet = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
     // Check if nothing was provided and throw an error if so
     if (letter == " ")
     {
       throw "No Guess Provided"
     }
     // Check for invalid cases (numbers, symbols, ...) throw an error if it is
-    if (letter != /^[a-zA-Z]+$/)
+    let splitletters = letter.split(' ');
+
+    for(const letters of splitletters){
+    if (!alphabet.includes(letter))
     {
-      throw "You must guess a letter!"
+      alert ("You must guess a letter!")
+      throw "You must guess a letter!";
     }
+  }
     // Check if more than one letter was provided. throw an error if it is.
     if (letter.length != 1)
     {
       throw "You may only guess 1 letter!"
     }
     // if it's a letter, convert it to lower case for consistency.
-    if (letter == /^[a-zA-Z]+$/)
+    if (alphabet.includes(letter))
     {
       letter = letter.toLowerCase;
     }
     // check if this.guesses includes the letter. Throw an error if it has been guessed already.
     // add the new letter to the guesses array.
-    for(i = 0; i< this.guesses.legnth; i++)
+    for(let i = 0; i< this.guesses.legnth; i++)
     {
       if(letter == guesses[i])
       {
@@ -91,7 +99,7 @@ class Hangman {
     }
     else
     {
-      wrongGuesses ++;
+      
       this.onWrongGuess;
     }    
   }
@@ -124,6 +132,7 @@ class Hangman {
    * if the number wrong guesses is 6, then also set isOver to true and didWin to false.
    */
   onWrongGuess() {
+    wrongGuesses ++;
     if (wrongGuess == 1 ){
       drawHead();
     } 
@@ -162,15 +171,15 @@ class Hangman {
    * i.e.: if the word is BOOK, and the letter O has been guessed, this would return _ O O _
    */
   getWordHolderText() {
-    placeHolder = " ";
-    totalWordLength = this.word.length;
-    for( i = 0; i <= totalWordLength; i++){
-      for( j = 0; j <= this.guesses.length; i++){
+    let placeHolder = " ";
+    let totalWordLength = this.word.length;
+    for(let i = 0; i <= totalWordLength; i++){
+      for(let j = 0; j <= this.guesses.length; j++){
         if(this.word.charAt(i) === this.guesses[j]){
-          placeholder.concat(this.word.charAt(i), " ");
+          placeHolder.concat(this.word.charAt(i), " ");
         }
         else{
-          placeholder.concat("_ ");
+          placeHolder.concat("_ ");
         }
       }
     }
@@ -186,8 +195,8 @@ class Hangman {
    * Hint: use the Array.prototype.join method.
    */
   getGuessesText() {
-    guess = this.guesses.join(", ");
-    guessesText = "Guesses: ";
+    let guess = this.guesses.join(", ");
+    let guessesText = "Guesses: ";
     guessesText.concat(guess);
     return guessesText
   }

@@ -33,12 +33,12 @@ game = new Hangman(canvas);
     event.preventDefault(); 
     difficulty = difficultySelect.value;  
     game.start(difficulty, function (){
-        startWrapper.classList.add('hidden');
-        gameWrapper.classList.remove('hidden');
-        wordHolderText.innerHTML = game.getWordHolderText();
-        guessesText.innerHTML = game.getGuessesText();
-      });
+      startWrapper.classList.add(`hidden`);
+      gameWrapper.classList.remove(`hidden`);
+      wordHolderText.innerHTML = game.getWordHolderText();
+      guessesText.innerHTML = game.getGuessesText();
     });
+  });
 
   // add a submit Event Listener to the guessForm
   //    get the guess input
@@ -59,7 +59,7 @@ game = new Hangman(canvas);
     game.guess(playerGuess);
     wordHolderText.innerHTML = game.getWordHolderText();
     guessesText.innerHTML = game.getGuessesText();
-    guessInput = " ";
+    let guessInput = " ";
     if (game.isOver = true)
     {
       guessInput.disabled = true;
