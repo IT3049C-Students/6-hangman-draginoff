@@ -163,7 +163,6 @@ class Hangman {
    */
   getWordHolderText() {
      placeHolder;
-     
     return;
   }
 

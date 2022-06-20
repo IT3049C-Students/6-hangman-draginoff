@@ -36,7 +36,7 @@ game = new Hangman(canvas);
       });
     });
 
-    start()
+    function start()
     {
     startWrapper.classList.add('hidden');
     gameWrapper.classList.remove('hidden');
